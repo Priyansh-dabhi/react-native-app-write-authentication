@@ -1,0 +1,2 @@
+APPWRITE_ENDPOINT = 'https://nyc.cloud.appwrite.io/v1';
+APPWRITE_PROJECT_ID = '685d13ae0009b272f0d9';
