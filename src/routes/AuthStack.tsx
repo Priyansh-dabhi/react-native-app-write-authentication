@@ -19,7 +19,8 @@ const AuthStack = () => {
     <Stack.Navigator 
     // initialRouteName='Home'
     screenOptions={{
-        headerTitleAlign:'center',
+        headerTitleAlign:'center'
+        
         
     }}
     >

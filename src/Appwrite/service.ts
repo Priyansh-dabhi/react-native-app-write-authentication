@@ -16,7 +16,6 @@ type CreateUserAccount = {
 type LoginUserAccount = {
     email: string,
     password: string,
-    name: string
 }
 
 class AppwriteService{
@@ -43,7 +42,7 @@ class AppwriteService{
                 )
                 if(userAccount){
                     // TODO: create login feature
-                    return this.login({email,password,name})
+                    return this.login({email,password})
                 }else{
                     return userAccount
                     ;

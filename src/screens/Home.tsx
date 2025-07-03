@@ -7,7 +7,7 @@ import {FAB} from 'react-native-paper'
 //snakbar
 import Snackbar from 'react-native-snackbar'
 //context API
-import {AppwriteContext} from '../Appwrite/AppwriteContext'
+import { AppwriteContext } from '../Appwrite/AppwriteContext'
 
 type UsesrObj = {
   name:string;
