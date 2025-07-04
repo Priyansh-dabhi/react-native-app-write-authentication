@@ -19,7 +19,7 @@ type LoginUserAccount = {
 }
 
 class AppwriteService{
-    account;
+    account:Account;
 
     constructor(){
         appwriteClient

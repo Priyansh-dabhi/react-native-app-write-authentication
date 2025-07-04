@@ -9,7 +9,7 @@ import Snackbar from 'react-native-snackbar'
 //context API
 import { AppwriteContext } from '../Appwrite/AppwriteContext'
 
-type UsesrObj = {
+type UserObj = {
   name:string;
   email: string;
 }
@@ -17,16 +17,16 @@ type UsesrObj = {
 
 const Home = () => {
 
-  const[userData, setUserData] = useState<UsesrObj>();
+  const [userData, setUserData] = useState<UserObj>()
+  const {appwrite, setIsLoggedIn} = useContext(AppwriteContext)
 
-  const {appwrite,setIsLoggedIn} = useContext(AppwriteContext)
   const handleLogout = () => {
     appwrite.logout()
-    .then(()=> {
+    .then(() => {
       setIsLoggedIn(false);
       Snackbar.show({
-        text:'Logout Successful',
-        duration:Snackbar.LENGTH_SHORT
+        text: 'Logout Successful',
+        duration: Snackbar.LENGTH_SHORT
       })
     })
   }
@@ -35,7 +35,7 @@ const Home = () => {
     appwrite.getCurrentUser()
     .then(response => {
       if(response){
-        const user: UsesrObj = {
+        const user: UserObj = {
           name:response.name,
           email: response.email,
         }

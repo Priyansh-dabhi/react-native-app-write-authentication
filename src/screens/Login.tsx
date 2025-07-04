@@ -6,7 +6,7 @@ import { FAB } from 'react-native-paper'
 import Snackbar from 'react-native-snackbar'
 
 //context API
-import {AppwriteContext} from '../appwrite/AppwriteContext'
+import {AppwriteContext} from '../Appwrite/AppwriteContext'
 
 // Navigation
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
