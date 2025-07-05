@@ -26,6 +26,9 @@ class AppwriteService{
         .setEndpoint(APPWRITE_ENDPOINT)
         .setProject(APPWRITE_PROJECT_ID)
 
+        console.log("Endpoint:", APPWRITE_ENDPOINT);
+        console.log("Project ID:", APPWRITE_PROJECT_ID);
+
         this.account = new Account(appwriteClient)
     }
 
@@ -44,8 +47,7 @@ class AppwriteService{
                     // TODO: create login feature
                     return this.login({email,password})
                 }else{
-                    return userAccount
-                    ;
+                    return userAccount;
                 }
             }catch (error){
                 Snackbar.show({

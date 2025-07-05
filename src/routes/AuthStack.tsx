@@ -21,7 +21,6 @@ const AuthStack = () => {
     screenOptions={{
         headerTitleAlign:'center'
         
-        
     }}
     >
       <Stack.Screen

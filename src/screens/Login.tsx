@@ -9,8 +9,11 @@ import Snackbar from 'react-native-snackbar'
 import {AppwriteContext} from '../Appwrite/AppwriteContext'
 
 // Navigation
+import Signup from './Signup'
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {AuthStackParamList} from '../routes/AuthStack';
+import { NavigationContainer } from '@react-navigation/native'
+import AppStack from '../routes/AppStack'
 
 type LoginScreenProps = NativeStackScreenProps<AuthStackParamList, 'Login'>
 
@@ -24,32 +27,50 @@ const Login = ({navigation}: LoginScreenProps) => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
-  const handleLogin = () => {
-    if (email.length < 1 || password.length < 1) {
-      setError('All fields are required')
-    } else {
-      const user = {
-        email,
-        password
+const handleLogin = async () => {
+  if (email.length < 1 || password.length < 1) {
+    setError('All fields are required');
+  } else {
+    try {
+      // Check if user already has an active session
+      const currentUser = await appwrite.getCurrentUser();
+      if (currentUser) {
+        Snackbar.show({
+          text: 'You are already logged in',
+          duration: Snackbar.LENGTH_SHORT,
+        });
+        setIsLoggedIn(true);
+        {<NavigationContainer>
+          <AppStack/>
+        </NavigationContainer>}
+        return;
       }
-      appwrite
-      .login(user)
-      .then((response) => {
-        if (response) {
-          setIsLoggedIn(true);
-          Snackbar.show({
-            text: 'Login Success',
-            duration: Snackbar.LENGTH_SHORT
-          })
-        }
-      })
-      .catch(e => {
-        console.log(e);
-        setEmail('Incorrect email or password')
-        
-      })
+
+      // If no session, attempt login
+      const user = { email, password };
+      const response = await appwrite.login(user);
+
+      if (response) {
+        setIsLoggedIn(true);
+        Snackbar.show({
+          text: 'Login Success',
+          duration: Snackbar.LENGTH_SHORT,
+        });
+        <NavigationContainer>
+          <AppStack/>
+        </NavigationContainer>
+      }
+    } catch (error: any) {
+      console.log(error);
+
+      Snackbar.show({
+        text: error.message || 'Incorrect email or password',
+        duration: Snackbar.LENGTH_SHORT,
+      });
     }
   }
+};
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
