@@ -1,7 +1,6 @@
 import { StyleSheet, Text, View, TextInput, KeyboardAvoidingView, Pressable, Platform } from 'react-native'
 import React,{useContext,useState} from 'react'
-//react native elements
-import { FAB } from 'react-native-paper'
+
 //Snackbar
 import Snackbar from 'react-native-snackbar'
 
